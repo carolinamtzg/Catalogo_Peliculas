@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="/Users/caromaritnez/Repositories/keepcoding/java/practica_final/Catalogo_pelis_app/data/create_database.db" readonly="0" foreign_keys="" case_sensitive_like="" temp_store="" wal_autocheckpoint="" synchronous=""/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1506"/><column_width id="4" width="0"/></tab_structure><tab_browse><current_table name="0,0:"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1">CREATE TABLE &quot;artistas&quot; (
+	&quot;id&quot;	INTEGER,
+	&quot;nombre&quot;	TEXT,
+	&quot;url_foto&quot;	TEXT,
+	&quot;url_web&quot;	TEXT,
+	PRIMARY KEY(&quot;id&quot;)
+	);
+
+CREATE TABLE &quot;directores&quot; (
+	&quot;id&quot;	INTEGER,
+	&quot;nombre&quot;	TEXT,
+	&quot;url_foto&quot;	TEXT,
+	&quot;url_web&quot;	TEXT,
+	PRIMARY KEY(&quot;id&quot;)
+	);
+
+CREATE TABLE &quot;generos&quot; (
+	&quot;id&quot;	INTEGER,
+	&quot;descripcion&quot;	TEXT,
+	PRIMARY KEY(&quot;id&quot;)
+);
+
+CREATE TABLE &quot;peliculas&quot; (
+	&quot;id&quot;	INTEGER,
+	&quot;titulo&quot;	TEXT,
+	&quot;id_director&quot;	INTEGER,
+	&quot;anyo&quot;	INTEGER,
+	&quot;url_caratula&quot;	TEXT,
+	&quot;id_genero&quot;	INTEGER,
+	&quot;es_animacion&quot;	INTEGER,
+	PRIMARY KEY(&quot;id&quot;),
+	FOREIGN KEY(&quot;id_director&quot;) REFERENCES &quot;directores&quot;(&quot;id&quot;),
+	FOREIGN KEY(&quot;id_genero&quot;) REFERENCES &quot;generos&quot;(&quot;id&quot;)
+	);
+
+CREATE TABLE &quot;repartos&quot; (
+	&quot;id_pelicula&quot;	INTEGER,
+	&quot;id_artista&quot;	INTEGER,
+	FOREIGN KEY(&quot;id_pelicula&quot;) REFERENCES &quot;peliculas&quot;(&quot;id&quot;),
+	FOREIGN KEY(&quot;id_artista&quot;) REFERENCES &quot;artistas&quot;(&quot;id&quot;),
+	PRIMARY KEY(&quot;id_pelicula&quot;,&quot;id_artista&quot;)
+);
+
+INSERT INTO generos (id, descripcion) VALUES (1, &quot;ACCION&quot;);
+INSERT INTO generos (id, descripcion) VALUES (2, &quot;AVENTURA&quot;);
+INSERT INTO generos (id, descripcion) VALUES (3, &quot;COMEDIA&quot;);
+INSERT INTO generos (id, descripcion) VALUES (4, &quot;DRAMA&quot;);
+INSERT INTO generos (id, descripcion) VALUES (5, &quot;TERROR&quot;);
+INSERT INTO generos (id, descripcion) VALUES (6, &quot;CIENCIA_FICCION&quot;);
+INSERT INTO generos (id, descripcion) VALUES (7, &quot;MUSICAL_DANZA&quot;);
+INSERT INTO generos (id, descripcion) VALUES (8, &quot;SUSPENSO&quot;);
+INSERT INTO generos (id, descripcion) VALUES (9, &quot;WESTERN&quot;);
+INSERT INTO generos (id, descripcion) VALUES (10, &quot;DOCUMENTAL&quot;);
+INSERT INTO generos (id, descripcion) VALUES (11, &quot;BIOGRAFICO&quot;);
+INSERT INTO generos (id, descripcion) VALUES (12, &quot;ROMANCE&quot;);
+
+INSERT INTO directores(id,nombre,url_foto,url_web) VALUES(1,&quot;John Lasseter&quot;, &quot;www.john_lasseter.png&quot;,&quot;www.john_lasseter.com&quot;);
+INSERT INTO directores(id,nombre,url_foto,url_web) VALUES(2,&quot;Quentin Tarantino&quot;, &quot;www.quentin_tarantino.png&quot;,&quot;www.quentin_tarantino.com&quot;);
+INSERT INTO directores(id,nombre,url_foto,url_web) VALUES(3,&quot;Steven Spielberg&quot;, &quot;www.steven_spielberg.png&quot;,&quot;www.steven_spielberg.com&quot;);
+INSERT INTO directores(id,nombre,url_foto,url_web) VALUES(4,&quot;Stanley Kubrick&quot;, &quot;www.stanley_kubrick.png&quot;,&quot;www.stanley_kubrick.com&quot;);
+INSERT INTO directores(id,nombre,url_foto,url_web) VALUES(5,&quot;David Fincher&quot;, &quot;www.david_fincher.png&quot;,&quot;www.david_fincher.com&quot;);
+
+INSERT INTO artistas(id,nombre,url_foto,url_web) VALUES(1,&quot;Tom Hanks&quot;, &quot;www.tom_hanks.png&quot;,&quot;www.tom_hanks.com&quot;);
+INSERT INTO artistas(id,nombre,url_foto,url_web) VALUES(2,&quot;Owen Wilson&quot;, &quot;www.owen_wilson.png&quot;,&quot;www.owen_wilson.com&quot;);
+INSERT INTO artistas(id,nombre,url_foto,url_web) VALUES(3,&quot;John Travolta&quot;, &quot;www.john_travolta.png&quot;,&quot;www.john_travolta.com&quot;);
+INSERT INTO artistas(id,nombre,url_foto,url_web) VALUES(4,&quot;Uma Thurman&quot;, &quot;www.uma_thurman.png&quot;,&quot;www.uma_thurman.com&quot;);
+INSERT INTO artistas(id,nombre,url_foto,url_web) VALUES(5,&quot;Lucy Liu&quot;, &quot;www.lucy_liu.png&quot;,&quot;www.lucy_liu.com&quot;);
+INSERT INTO artistas(id,nombre,url_foto,url_web) VALUES(6,&quot;Robert De Niro&quot;, &quot;www.robert_de_niro.png&quot;,&quot;www.robert_de_niro.com&quot;);
+INSERT INTO artistas(id,nombre,url_foto,url_web) VALUES(7,&quot;Leonardo DiCaprio&quot;, &quot;www.leonardo_dicaprio.png&quot;,&quot;www.leonardo_dicaprio.com&quot;);
+INSERT INTO artistas(id,nombre,url_foto,url_web) VALUES(8,&quot;Matt Damon&quot;, &quot;www.matt_damon.png&quot;,&quot;www.matt_damon.com&quot;);
+INSERT INTO artistas(id,nombre,url_foto,url_web) VALUES(9,&quot;Sam Neill&quot;, &quot;www.sam_neill.png&quot;,&quot;www.sam_neill.com&quot;);
+INSERT INTO artistas(id,nombre,url_foto,url_web) VALUES(10,&quot;Brad Pitt&quot;, &quot;www.brad_pitt.png&quot;,&quot;www.brad_pitt.com&quot;);
+INSERT INTO artistas(id,nombre,url_foto,url_web) VALUES(11,&quot;Edward Norton&quot;, &quot;www.edward_norton.png&quot;,&quot;www.edward_norton.com&quot;);
+INSERT INTO artistas(id,nombre,url_foto,url_web) VALUES(12,&quot;Jesse Eisenberg&quot;, &quot;www.jesse_eisenberg.png&quot;,&quot;www.jesse_eisenberg.com&quot;);
+INSERT INTO artistas(id,nombre,url_foto,url_web) VALUES(13,&quot;Andrew Garfield&quot;, &quot;www.andrew_garfield.png&quot;,&quot;www.andrew_garfield.com&quot;);
+INSERT INTO artistas(id,nombre,url_foto,url_web) VALUES(14,&quot;Laura Dern&quot;, &quot;www.laura_dern.png&quot;,&quot;www.laura_dern.com&quot;);
+INSERT INTO artistas(id,nombre,url_foto,url_web) VALUES(15,&quot;Larry the Cable Guy&quot;, &quot;www.larry_the_cable_guy.png&quot;,&quot;www.larry_the_cable_guy.com&quot;);
+</sql><sql name="SQL 2">INSERT INTO peliculas(id, titulo, id_director, anyo, url_caratula, id_genero, es_animacion) VALUES (1, &quot;Toy Story&quot;, 1, 1995, &quot;caratula_toy_story.png&quot;, 3, 1);
+</sql><sql name="SQL 4">SELECT id, titulo, id_director, año, url_caratula, id_genero, es_animacion FROM peliculas JOIN directores ON peliculas.id_director = directores.id WHERE peliculas.id = ?;</sql><sql name="SQL 5">INSERT INTO repartos (id, descripcion) VALUES (1, &quot;ACCION&quot;);
+</sql><sql name="SQL 6">INSERT INTO artistas(id,nombre,url_foto,url_web) VALUES(1,&quot;Tom Hanks&quot;, &quot;www.tom_hanks.png&quot;,&quot;www.tom_hanks.com&quot;);
+INSERT INTO artistas(id,nombre,url_foto,url_web) VALUES(2,&quot;Owen Wilson&quot;, &quot;www.owen_wilson.png&quot;,&quot;www.owen_wilson.com&quot;);
+INSERT INTO artistas(id,nombre,url_foto,url_web) VALUES(3,&quot;John Travolta&quot;, &quot;www.john_travolta.png&quot;,&quot;www.john_travolta.com&quot;);
+INSERT INTO artistas(id,nombre,url_foto,url_web) VALUES(4,&quot;Uma Thurman&quot;, &quot;www.uma_thurman.png&quot;,&quot;www.uma_thurman.com&quot;);
+INSERT INTO artistas(id,nombre,url_foto,url_web) VALUES(5,&quot;Lucy Liu&quot;, &quot;www.lucy_liu.png&quot;,&quot;www.lucy_liu.com&quot;);
+INSERT INTO artistas(id,nombre,url_foto,url_web) VALUES(6,&quot;Robert De Niro&quot;, &quot;www.robert_de_niro.png&quot;,&quot;www.robert_de_niro.com&quot;);
+INSERT INTO artistas(id,nombre,url_foto,url_web) VALUES(7,&quot;Leonardo DiCaprio&quot;, &quot;www.leonardo_dicaprio.png&quot;,&quot;www.leonardo_dicaprio.com&quot;);
+INSERT INTO artistas(id,nombre,url_foto,url_web) VALUES(8,&quot;Matt Damon&quot;, &quot;www.matt_damon.png&quot;,&quot;www.matt_damon.com&quot;);
+INSERT INTO artistas(id,nombre,url_foto,url_web) VALUES(9,&quot;Sam Neill&quot;, &quot;www.sam_neill.png&quot;,&quot;www.sam_neill.com&quot;);
+INSERT INTO artistas(id,nombre,url_foto,url_web) VALUES(10,&quot;Brad Pitt&quot;, &quot;www.brad_pitt.png&quot;,&quot;www.brad_pitt.com&quot;);
+INSERT INTO artistas(id,nombre,url_foto,url_web) VALUES(11,&quot;Edward Norton&quot;, &quot;www.edward_norton.png&quot;,&quot;www.edward_norton.com&quot;);
+INSERT INTO artistas(id,nombre,url_foto,url_web) VALUES(12,&quot;Jesse Eisenberg&quot;, &quot;www.jesse_eisenberg.png&quot;,&quot;www.jesse_eisenberg.com&quot;);
+INSERT INTO artistas(id,nombre,url_foto,url_web) VALUES(13,&quot;Andrew Garfield&quot;, &quot;www.andrew_garfield.png&quot;,&quot;www.andrew_garfield.com&quot;);
+INSERT INTO artistas(id,nombre,url_foto,url_web) VALUES(14,&quot;Laura Dern&quot;, &quot;www.laura_dern.png&quot;,&quot;www.laura_dern.com&quot;);
+INSERT INTO artistas(id,nombre,url_foto,url_web) VALUES(15,&quot;Larry the Cable Guy&quot;, &quot;www.larry_the_cable_guy.png&quot;,&quot;www.larry_the_cable_guy.com&quot;);
+</sql><current_tab id="4"/></tab_sql></sqlb_project>

@@ -8,7 +8,8 @@ public class Pelicula {
   private Genero genero;
   private boolean animacion;
 
-  public Pelicula(String titulo, Director director, int año, Genero genero, boolean animacion) {
+  public Pelicula(int id, String titulo, Director director, int año, Genero genero, boolean animacion) {
+    this.id = id;
     this.titulo = titulo;
     this.director = director;
     this.año = año;

@@ -80,7 +80,7 @@ public class DirectorDAO {
   }
 
   // metodo para modificar director:
-  public void modificar(Director director) throws SQLException {
+  public void modifica(Director director) throws SQLException {
     String sql = "UPDATE directores SET nombre = ? WHERE id = ?";
     Connection conn = new Utilidades().getConnection(path);
     PreparedStatement sentenciaSQL = conn.prepareStatement(sql);

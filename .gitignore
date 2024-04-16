@@ -1,4 +1,6 @@
 .vscode/
+.DS_Store
+data/.DS_Store
 test-lib/
 **.sqlite
 **.dat

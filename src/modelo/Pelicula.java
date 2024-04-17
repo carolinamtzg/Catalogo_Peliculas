@@ -4,7 +4,7 @@ public class Pelicula {
   private int id;
   private String titulo;
   private Director director;
-  private int año;
+  private int anyo;
   private Genero genero;
   private boolean animacion;
 
@@ -12,11 +12,12 @@ public class Pelicula {
     this.id = id;
     this.titulo = titulo;
     this.director = director;
-    this.año = año;
+    this.anyo = año;
     this.genero = genero;
     this.animacion = animacion;
   }
 
+  // getters:
   public int getId() {
     return id;
   }
@@ -29,8 +30,8 @@ public class Pelicula {
     return director;
   }
 
-  public int getAño() {
-    return año;
+  public int getAnyo() {
+    return anyo;
   }
 
   public Genero getGenero() {
@@ -41,4 +42,28 @@ public class Pelicula {
     return animacion;
   }
 
+  // setters:
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  public void setTitulo(String titulo) {
+    this.titulo = titulo;
+  }
+
+  public void setDirector(Director director) {
+    this.director = director;
+  }
+
+  public void setAnyo(int anyo) {
+    this.anyo = anyo;
+  }
+
+  public void setGenero(Genero genero) {
+    this.genero = genero;
+  }
+
+  public void setAnimacion(boolean animacion) {
+    this.animacion = animacion;
+  }
 }

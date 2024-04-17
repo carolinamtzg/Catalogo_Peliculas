@@ -104,7 +104,7 @@ public class PeliculaDAO {
 
     sentenciaSQL.setString(1, pelicula.getTitulo());
     sentenciaSQL.setInt(2, pelicula.getDirector().getId());
-    sentenciaSQL.setInt(3, pelicula.getAño());
+    sentenciaSQL.setInt(3, pelicula.getAnyo());
     sentenciaSQL.setInt(4, pelicula.getGenero().ordinal() + 1); // el indice de enum comienza en 0, pero en la db
                                                                 // comienza en 1.
     sentenciaSQL.setBoolean(5, pelicula.isAnimacion());

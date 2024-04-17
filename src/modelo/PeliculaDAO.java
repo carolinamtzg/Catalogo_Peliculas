@@ -27,7 +27,7 @@ public class PeliculaDAO {
 
     while (resultado.next()) {
       Director director = new Director(resultado.getInt("id"), resultado.getString("director_nombre"));
-      Genero genero = new Genero.valueOf(resultado.getString("genero_nombre"));
+      Genero genero = Genero.valueOf(resultado.getString("genero_nombre"));
       Pelicula pelicula = new Pelicula(resultado.getInt("id"), resultado.getString("titulo"), director,
           resultado.getInt("anyo"), genero, resultado.getBoolean("es_animacion"));
 
@@ -38,7 +38,7 @@ public class PeliculaDAO {
 
   // metodo buscaPorId:
   public Pelicula buscaPorId(int id) throws SQLException {
-    String sql = "SELECT titulo, id_director, anyo, id_genero, es_animacion FROM peliculas WHERE id = ?";
+    String sql = "SELECT p.titulo, p.anyo, p.es_animacion, d.id AS director_id, d.nombre AS director_nombre, g.descripcion AS genero_nombre FROM peliculas p JOIN directores d ON p.id_director = d.id JOIN generos g ON p.id_genero = g.id WHERE p.id = ?";
 
     Connection conn = new Utilidades().getConnection(path);
     PreparedStatement sentenciaSQL = conn.prepareStatement(sql);
@@ -48,7 +48,7 @@ public class PeliculaDAO {
     ResultSet resultado = sentenciaSQL.executeQuery();
 
     if (resultado.next()) {
-      Director director = new Director(resultado.getInt("id"), resultado.getString("director_nombre"));
+      Director director = new Director(resultado.getInt("id_director"), resultado.getString("director_nombre"));
       return new Pelicula(id, resultado.getString("titulo"), director, resultado.getInt("anyo"),
           Genero.valueOf(resultado.getString("genero")), resultado.getBoolean("es_animacion"));
     }
@@ -57,7 +57,8 @@ public class PeliculaDAO {
 
   // metodo buscaPorNombre:
   public Pelicula buscaPorNombre(String nombre) throws SQLException {
-    String sql = "SELECT titulo, id_director, anyo, id_genero, es_animacion FROM peliculas WHERE nombre = ?";
+    String sql = "SELECT id, titulo, id_director, anyo, id_genero, es_animacion FROM peliculas WHERE titulo = ?";
+
     Connection conn = new Utilidades().getConnection(path);
     PreparedStatement sentenciaSQL = conn.prepareStatement(sql);
 
@@ -69,13 +70,17 @@ public class PeliculaDAO {
       int id = resultado.getInt("id");
       int año = resultado.getInt("anyo");
       Boolean animacion = resultado.getBoolean("es_animacion");
-      String genero_nombre = resultado.getString("genero_nombre");
-      String director_nombre = resultado.getString("director_nombre");
+      int directorId = resultado.getInt("id_director");
+      int generoId = resultado.getInt("id_genero");
 
-      Director director = new Director(resultado.getInt("id"), resultado.getString("director_nombre"));
-      Genero genero = Genero.valueOf(genero_nombre);
+      // obtener el nombre del director:
+      DirectorDAO directorDAO = new DirectorDAO(path);
+      Director director = directorDAO.buscaPorId(generoId);
 
-      return new Pelicula(id, director_nombre, director, año, genero, animacion);
+      // instancio Genero para obtenerlo directamente del enum:
+      Genero genero = Genero.values()[generoId - 1];
+
+      return new Pelicula(id, nombre, director, año, genero, animacion);
     }
     return null;
   }
@@ -93,6 +98,7 @@ public class PeliculaDAO {
   // metodo para modificar la pelicula:
   public void modifica(Pelicula pelicula) throws SQLException {
     String sql = "UPDATE peliculas SET titulo = ?, id_director = ?, anyo = ?, id_genero = ?, es_animacion = ? WHERE id = ?";
+
     Connection conn = new Utilidades().getConnection(path);
     PreparedStatement sentenciaSQL = conn.prepareStatement(sql);
 

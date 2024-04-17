@@ -1,6 +1,7 @@
 .vscode/
 .DS_Store
 data/.DS_Store
+data/create_database.sqlite-journal
 test-lib/
 **.sqlite
 **.dat

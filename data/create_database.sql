@@ -59,6 +59,7 @@ INSERT INTO directores(id,nombre,url_foto,url_web) VALUES(2,"Quentin Tarantino",
 INSERT INTO directores(id,nombre,url_foto,url_web) VALUES(3,"Steven Spielberg", "www.steven_spielberg.png","www.steven_spielberg.com");
 INSERT INTO directores(id,nombre,url_foto,url_web) VALUES(4,"Stanley Kubrick", "www.stanley_kubrick.png","www.stanley_kubrick.com");
 INSERT INTO directores(id,nombre,url_foto,url_web) VALUES(5,"David Fincher", "www.david_fincher.png","www.david_fincher.com");
+INSERT INTO directores(id,nombre,url_foto,url_web) VALUES(6,"Martin Scorsese", "www.martin_scorsese.png","www.martin_scorsese.com");
 
 INSERT INTO artistas(id,nombre,url_foto,url_web) VALUES(1,"Tom Hanks", "www.tom_hanks.png","www.tom_hanks.com");
 INSERT INTO artistas(id,nombre,url_foto,url_web) VALUES(2,"Owen Wilson", "www.owen_wilson.png","www.owen_wilson.com");

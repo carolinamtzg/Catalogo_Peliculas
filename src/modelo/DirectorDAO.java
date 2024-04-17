@@ -12,6 +12,18 @@ public class DirectorDAO {
 
   public DirectorDAO(String path) {
     this.path = path;
+
+    Connection conn = new Utilidades().getConnection(path);
+    if (conn != null) {
+      System.out.println("Conexión establecida correctamente.");
+      try {
+        conn.close(); // cierro la conexion despues de verificar
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    } else {
+      System.out.println("Error al establecer la conexión.");
+    }
   }
 
   // metodo dameTodos:
@@ -27,7 +39,8 @@ public class DirectorDAO {
 
     while (resultado.next()) {
       Director siguiente;
-      siguiente = new Director(resultado.getInt("id"), resultado.getString("nombre"));
+      siguiente = new Director(resultado.getInt("id"), resultado.getString("nombre"), resultado.getString("url_foto"),
+          resultado.getString("url_web"));
       directores.add(siguiente);
     }
     return directores;
@@ -45,7 +58,8 @@ public class DirectorDAO {
     ResultSet resultado = sentenciaSQL.executeQuery();
 
     if (resultado.next()) {
-      return new Director(resultado.getInt("id"), resultado.getString("nombre"));
+      return new Director(resultado.getInt("id"), resultado.getString("nombre"), resultado.getString("url_web"),
+          resultado.getString("nombre"));
     } else {
       return null;
     }
@@ -63,7 +77,8 @@ public class DirectorDAO {
     ResultSet resultado = sentenciaSQL.executeQuery();
 
     if (resultado.next()) {
-      return new Director(resultado.getInt("id"), resultado.getString("nombre"));
+      return new Director(resultado.getInt("id"), resultado.getString("nombre"), resultado.getString("url_foto"),
+          resultado.getString("url_web"));
     } else {
       return null;
     }
@@ -87,6 +102,8 @@ public class DirectorDAO {
 
     sentenciaSQL.setInt(1, director.getId());
     sentenciaSQL.setString(2, director.getNombre());
+    sentenciaSQL.setString(3, director.getUrl_foto());
+    sentenciaSQL.setString(4, director.getUrl_web());
     sentenciaSQL.executeUpdate();
   }
 }

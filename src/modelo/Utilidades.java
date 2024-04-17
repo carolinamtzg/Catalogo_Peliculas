@@ -7,14 +7,12 @@ import java.sql.SQLException;
 public class Utilidades {
   public Connection getConnection(String path) {
     Connection conn = null;
-
     try {
       conn = DriverManager.getConnection(String.format("jdbc:sqlite:%s", path));
-      System.out.println("Se ha establecido la conexion");
-
-    } catch (SQLException err) {
-      System.out.println("Error en la conexion a base de datos");
-      err.printStackTrace();
+      System.out.println("Conexión establecida correctamente.");
+    } catch (SQLException e) {
+      System.out.println("Error al establecer la conexión a la base de datos.");
+      e.printStackTrace();
     }
     return conn;
   }

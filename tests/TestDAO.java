@@ -1,11 +1,17 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 import org.junit.Test;
 
@@ -13,7 +19,7 @@ import modelo.Utilidades;
 
 public class TestDAO {
   @Test
-  public void testJDBCConecta() {
+  public void testIfJDBCExists() {
 
     boolean laClaseJDBCExiste = false;
     try {
@@ -32,11 +38,9 @@ public class TestDAO {
   public void testCrearConexion() throws SQLException {
     Utilidades utils = new Utilidades();
 
-    Connection conn = utils.getConnection("./data/create_database.sqlite");
+    String DB_PATH = "./data/create_database.sqlite";
+    Connection conn = utils.getConnection(DB_PATH);
     assertNotNull(conn);
     conn.close();
-
-    conn = utils.getConnection("./data/create_database.sqlite");
-    assertNull(conn);
   }
 }

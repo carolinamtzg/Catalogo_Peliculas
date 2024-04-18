@@ -86,4 +86,20 @@ public class TestModelo {
     pelicula.setAnimacion(new_animacion);
     assertEquals(pelicula.isAnimacion(), new_animacion);
   }
+
+  @Test
+  public void testGenero() {
+    assertEquals(Genero.ACCION, Genero.valueOf("ACCION"));
+    assertEquals(Genero.AVENTURA, Genero.valueOf("AVENTURA"));
+    assertEquals(Genero.BIOGRAFICO, Genero.valueOf("BIOGRAFICO"));
+    assertEquals(Genero.CIENCIA_FICCION, Genero.valueOf("CIENCIA_FICCION"));
+    assertEquals(Genero.COMEDIA, Genero.valueOf("COMEDIA"));
+    assertEquals(Genero.DOCUMENTAL, Genero.valueOf("DOCUMENTAL"));
+    assertEquals(Genero.DRAMA, Genero.valueOf("DRAMA"));
+    assertEquals(Genero.MUSICAL_DANZA, Genero.valueOf("MUSICAL_DANZA"));
+    assertEquals(Genero.ROMANCE, Genero.valueOf("ROMANCE"));
+    assertEquals(Genero.SUSPENSO, Genero.valueOf("SUSPENSO"));
+    assertEquals(Genero.TERROR, Genero.valueOf("TERROR"));
+    assertEquals(Genero.WESTERN, Genero.valueOf("WESTERN"));
+  }
 }

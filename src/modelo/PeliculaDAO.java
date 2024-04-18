@@ -26,7 +26,8 @@ public class PeliculaDAO {
     ResultSet resultado = sentenciaSQL.executeQuery(sql);
 
     while (resultado.next()) {
-      Director director = new Director(resultado.getInt("id"), resultado.getString("director_nombre"));
+      Director director = new Director(resultado.getInt("id"), resultado.getString("director_nombre"),
+          resultado.getString("url_foto"), resultado.getString("url_web"));
       Genero genero = Genero.valueOf(resultado.getString("genero_nombre"));
       Pelicula pelicula = new Pelicula(resultado.getInt("id"), resultado.getString("titulo"), director,
           resultado.getInt("anyo"), genero, resultado.getBoolean("es_animacion"));
@@ -48,7 +49,8 @@ public class PeliculaDAO {
     ResultSet resultado = sentenciaSQL.executeQuery();
 
     if (resultado.next()) {
-      Director director = new Director(resultado.getInt("id_director"), resultado.getString("director_nombre"));
+      Director director = new Director(resultado.getInt("id_director"), resultado.getString("director_nombre"),
+          resultado.getString("url_foto"), resultado.getString("url_web"));
       return new Pelicula(id, resultado.getString("titulo"), director, resultado.getInt("anyo"),
           Genero.valueOf(resultado.getString("genero")), resultado.getBoolean("es_animacion"));
     }
@@ -56,13 +58,13 @@ public class PeliculaDAO {
   }
 
   // metodo buscaPorNombre:
-  public Pelicula buscaPorNombre(String nombre) throws SQLException {
+  public Pelicula buscaPorNombre(String titulo) throws SQLException {
     String sql = "SELECT id, titulo, id_director, anyo, id_genero, es_animacion FROM peliculas WHERE titulo = ?";
 
     Connection conn = new Utilidades().getConnection(path);
     PreparedStatement sentenciaSQL = conn.prepareStatement(sql);
 
-    sentenciaSQL.setString(1, nombre);
+    sentenciaSQL.setString(1, titulo);
 
     ResultSet resultado = sentenciaSQL.executeQuery();
 
@@ -70,7 +72,7 @@ public class PeliculaDAO {
       int id = resultado.getInt("id");
       int año = resultado.getInt("anyo");
       Boolean animacion = resultado.getBoolean("es_animacion");
-      int directorId = resultado.getInt("id_director");
+      // int directorId = resultado.getInt("id_director");
       int generoId = resultado.getInt("id_genero");
 
       // obtener el nombre del director:
@@ -80,7 +82,7 @@ public class PeliculaDAO {
       // instancio Genero para obtenerlo directamente del enum:
       Genero genero = Genero.values()[generoId - 1];
 
-      return new Pelicula(id, nombre, director, año, genero, animacion);
+      return new Pelicula(id, titulo, director, año, genero, animacion);
     }
     return null;
   }

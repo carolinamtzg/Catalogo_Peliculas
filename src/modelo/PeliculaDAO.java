@@ -16,8 +16,7 @@ public class PeliculaDAO {
 
   // metodo dameTodos:
   public ArrayList<Pelicula> dameTodos() throws SQLException {
-    String sql = "SELECT p.id, p.titulo, p.anyo, p.es_animacion, d.nombre AS director_nombre, g.descripcion AS genero_nombre FROM peliculas p JOIN directores d ON p.id_director = d.id JOIN generos g ON p.id_genero = g.id ORDER BY g.descripcion, p.anyo DESC, p.titulo";
-
+    String sql = "SELECT p.id AS id_pelicula, p.titulo AS titulo_pelicula, p.anyo AS anyo_pelicula, p.es_animacion AS es_animacion, p.url_caratula AS url_caratula, d.nombre AS nombre_director, d.id AS id_director, d.url_foto AS url_foto_director, d.url_web AS url_web_director, g.descripcion AS nombre_genero FROM peliculas p JOIN directores d ON p.id_director = d.id JOIN generos g ON p.id_genero = g.id ORDER BY g.descripcion, p.anyo DESC, p.titulo";
     ArrayList<Pelicula> peliculas = new ArrayList<>();
     Connection conn = new Utilidades().getConnection(path);
 
@@ -26,11 +25,15 @@ public class PeliculaDAO {
     ResultSet resultado = sentenciaSQL.executeQuery(sql);
 
     while (resultado.next()) {
-      Director director = new Director(resultado.getInt("id"), resultado.getString("director_nombre"),
-          resultado.getString("url_foto"), resultado.getString("url_web"));
-      Genero genero = Genero.valueOf(resultado.getString("genero_nombre"));
-      Pelicula pelicula = new Pelicula(resultado.getInt("id"), resultado.getString("titulo"), director,
-          resultado.getInt("anyo"), resultado.getString("url_caratula"), genero, resultado.getBoolean("es_animacion"));
+      Director director = new Director(resultado.getInt("id_director"), resultado.getString("nombre_director"),
+          resultado.getString("url_foto_director"), resultado.getString("url_web_director"));
+
+      Genero genero = Genero.valueOf(resultado.getString("nombre_genero"));
+
+      Pelicula pelicula = new Pelicula(resultado.getInt("id_pelicula"), resultado.getString("titulo_pelicula"),
+          director,
+          resultado.getInt("anyo_pelicula"), resultado.getString("url_caratula"), genero,
+          resultado.getBoolean("es_animacion"));
       peliculas.add(pelicula);
     }
     return peliculas;
@@ -38,8 +41,8 @@ public class PeliculaDAO {
 
   // metodo buscaPorId:
   public Pelicula buscaPorId(int id) throws SQLException {
-    String sql = "SELECT p.titulo, p.anyo, p.es_animacion, d.id AS director_id, d.nombre AS director_nombre, g.descripcion AS genero_nombre FROM peliculas p JOIN directores d ON p.id_director = d.id JOIN generos g ON p.id_genero = g.id WHERE p.id = ?";
 
+    String sql = "SELECT d.id AS id_director, d.nombre AS nombre_director, d.url_foto AS url_foto_director, d.url_web AS url_web_director, p.titulo AS titulo_pelicula, p.anyo AS anyo_pelicula, p.url_caratula AS url_caratula_pelicula, p.es_animacion AS es_animacion_pelicula, g.descripcion AS genero_pelicula FROM peliculas p LEFT JOIN directores d ON p.id_director = d.id LEFT JOIN generos g ON p.id_genero = g.id WHERE p.id = ?";
     Connection conn = new Utilidades().getConnection(path);
     PreparedStatement sentenciaSQL = conn.prepareStatement(sql);
 
@@ -48,18 +51,19 @@ public class PeliculaDAO {
     ResultSet resultado = sentenciaSQL.executeQuery();
 
     if (resultado.next()) {
-      Director director = new Director(resultado.getInt("id_director"), resultado.getString("director_nombre"),
-          resultado.getString("url_foto"), resultado.getString("url_web"));
-      return new Pelicula(id, resultado.getString("titulo"), director, resultado.getInt("anyo"),
-          resultado.getString("url_caratula"), Genero.valueOf(resultado.getString("genero")),
-          resultado.getBoolean("es_animacion"));
+      Director director = new Director(resultado.getInt("id_director"), resultado.getString("nombre_director"),
+          resultado.getString("url_foto_director"), resultado.getString("url_web_director"));
+
+      return new Pelicula(id, resultado.getString("titulo_pelicula"), director, resultado.getInt("anyo_pelicula"),
+          resultado.getString("url_caratula_pelicula"), Genero.valueOf(resultado.getString("genero_pelicula")),
+          resultado.getBoolean("es_animacion_pelicula"));
     }
     return null;
   }
 
   // metodo buscar pelicula por titulo:
   public Pelicula buscaPorTitulo(String titulo) throws SQLException {
-    String sql = "SELECT id, titulo, id_director, anyo, url_caratula, id_genero, es_animacion FROM peliculas WHERE titulo = ?";
+    String sql = "SELECT p.id AS id_pelicula, p.titulo AS titulo_pelicula, p.id_director AS id_director, p.anyo AS anyo_pelicula, p.url_caratula AS url_caratula, p.id_genero AS id_genero_pelicula, p.es_animacion AS es_animacion FROM peliculas p WHERE titulo = ?";
 
     Connection conn = new Utilidades().getConnection(path);
     PreparedStatement sentenciaSQL = conn.prepareStatement(sql);
@@ -69,12 +73,12 @@ public class PeliculaDAO {
     ResultSet resultado = sentenciaSQL.executeQuery();
 
     if (resultado.next()) {
-      int id = resultado.getInt("id");
-      titulo = resultado.getString("titulo");
-      int año = resultado.getInt("anyo");
+      int id = resultado.getInt("id_pelicula");
+      titulo = resultado.getString("titulo_pelicula");
+      int año = resultado.getInt("anyo_pelicula");
       String url_caratula = resultado.getString("url_caratula");
       Boolean animacion = resultado.getBoolean("es_animacion");
-      int generoId = resultado.getInt("id_genero");
+      int generoId = resultado.getInt("id_genero_pelicula");
 
       // obtener el nombre del director:
       DirectorDAO directorDAO = new DirectorDAO(path);

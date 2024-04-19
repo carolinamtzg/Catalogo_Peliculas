@@ -5,14 +5,18 @@ public class Pelicula {
   private String titulo;
   private Director director;
   private int anyo;
+  private String url_caratula;
+
   private Genero genero;
   private boolean animacion;
 
-  public Pelicula(int id, String titulo, Director director, int año, Genero genero, boolean animacion) {
+  public Pelicula(int id, String titulo, Director director, int año, String url_caratula, Genero genero,
+      boolean animacion) {
     this.id = id;
     this.titulo = titulo;
     this.director = director;
     this.anyo = año;
+    this.url_caratula = url_caratula;
     this.genero = genero;
     this.animacion = animacion;
   }
@@ -32,6 +36,10 @@ public class Pelicula {
 
   public int getAnyo() {
     return anyo;
+  }
+
+  public String getUrl_caratula() {
+    return url_caratula;
   }
 
   public Genero getGenero() {
@@ -57,6 +65,10 @@ public class Pelicula {
 
   public void setAnyo(int anyo) {
     this.anyo = anyo;
+  }
+
+  public void setUrl_caratula(String url_caratula) {
+    this.url_caratula = url_caratula;
   }
 
   public void setGenero(Genero genero) {

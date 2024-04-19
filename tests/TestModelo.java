@@ -47,15 +47,17 @@ public class TestModelo {
     String titulo = "The Grand Budapest Hotel";
     Director director = new Director(id, "Wes Anderson", "www.wes_anderson.png", "www.wes_anderson.com");
     int anyo = 2014;
+    String url_caratula = "www.the_grand_budapest_hotel_caratula.png";
     Genero genero = Genero.COMEDIA;
     boolean animacion = false;
 
-    Pelicula pelicula = new Pelicula(id, titulo, director, anyo, genero, animacion);
+    Pelicula pelicula = new Pelicula(id, titulo, director, anyo, url_caratula, genero, animacion);
 
     assertEquals(pelicula.getId(), id);
     assertEquals(pelicula.getTitulo(), titulo);
     assertEquals(pelicula.getDirector(), director);
     assertEquals(pelicula.getAnyo(), anyo);
+    assertEquals(pelicula.getUrl_caratula(), url_caratula);
     assertEquals(pelicula.getGenero(), genero);
     assertEquals(pelicula.isAnimacion(), false);
 

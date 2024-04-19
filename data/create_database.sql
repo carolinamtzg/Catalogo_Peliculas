@@ -88,4 +88,23 @@ INSERT INTO peliculas(id, titulo, id_director, anyo, url_caratula, id_genero, es
 INSERT INTO peliculas(id, titulo, id_director, anyo, url_caratula, id_genero, es_animacion) VALUES (9, "The Social Network", 5, 2010, "caratula_the_social_network.png", 10,0);
 INSERT INTO peliculas(id, titulo, id_director, anyo, url_caratula, id_genero, es_animacion) VALUES (10, "The Departed", 6, 2006, "caratula_the_departed.png", 8,0);
 
+INSERT INTO repartos (id_pelicula, id_artista) VALUES (1,1);
+INSERT INTO repartos (id_pelicula, id_artista) VALUES (2,2);
+INSERT INTO repartos (id_pelicula, id_artista) VALUES (2,15);
+INSERT INTO repartos (id_pelicula, id_artista) VALUES (3,3);
+INSERT INTO repartos (id_pelicula, id_artista) VALUES (3,4);
+INSERT INTO repartos (id_pelicula, id_artista) VALUES (4,4);
+INSERT INTO repartos (id_pelicula, id_artista) VALUES (4,5);
+INSERT INTO repartos (id_pelicula, id_artista) VALUES (5,6);
+INSERT INTO repartos (id_pelicula, id_artista) VALUES (6,9);
+INSERT INTO repartos (id_pelicula, id_artista) VALUES (6,14);
+INSERT INTO repartos (id_pelicula, id_artista) VALUES (7,1);
+INSERT INTO repartos (id_pelicula, id_artista) VALUES (7,8);
+INSERT INTO repartos (id_pelicula, id_artista) VALUES (8,10);
+INSERT INTO repartos (id_pelicula, id_artista) VALUES (8,11);
+INSERT INTO repartos (id_pelicula, id_artista) VALUES (9,12);
+INSERT INTO repartos (id_pelicula, id_artista) VALUES (9,13);
+INSERT INTO repartos (id_pelicula, id_artista) VALUES (10,7);
+INSERT INTO repartos (id_pelicula, id_artista) VALUES (10,8);
+
 COMMIT;

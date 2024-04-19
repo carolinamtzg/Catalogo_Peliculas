@@ -36,6 +36,8 @@ public class PeliculaDAO {
           resultado.getBoolean("es_animacion"));
       peliculas.add(pelicula);
     }
+    conn.close();
+
     return peliculas;
   }
 
@@ -58,6 +60,8 @@ public class PeliculaDAO {
           resultado.getString("url_caratula_pelicula"), Genero.valueOf(resultado.getString("genero_pelicula")),
           resultado.getBoolean("es_animacion_pelicula"));
     }
+    conn.close();
+
     return null;
   }
 
@@ -89,6 +93,8 @@ public class PeliculaDAO {
 
       return new Pelicula(id, titulo, director, año, url_caratula, genero, animacion);
     }
+    conn.close();
+
     return null;
   }
 
@@ -118,7 +124,9 @@ public class PeliculaDAO {
     PreparedStatement sentenciaSQL = conn.prepareStatement(sql);
 
     sentenciaSQL.setInt(1, id);
+
     sentenciaSQL.executeUpdate();
+    conn.close();
   }
 
   // metodo para modificar la pelicula:
@@ -135,6 +143,8 @@ public class PeliculaDAO {
                                                                 // comienza en 1.
     sentenciaSQL.setBoolean(5, pelicula.isAnimacion());
     sentenciaSQL.setInt(6, pelicula.getId());
+
     sentenciaSQL.executeUpdate();
+    conn.close();
   }
 }

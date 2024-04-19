@@ -42,6 +42,7 @@ public class DirectorDAO {
       directores.add(siguiente);
     }
     conn.close(); // cierro la conexion despues de la query
+
     return directores;
   }
 
@@ -62,6 +63,7 @@ public class DirectorDAO {
       return dir;
     }
     conn.close();
+
     return null;
   }
 
@@ -83,6 +85,7 @@ public class DirectorDAO {
       return dir;
     } else {
       conn.close();
+
       return null;
     }
 

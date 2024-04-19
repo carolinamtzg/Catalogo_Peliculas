@@ -41,6 +41,7 @@ public class ArtistasDAO {
       listaArtistas.add(siguiente);
     }
     conn.close(); // cierro la conexion despues de la query
+
     return listaArtistas;
   }
 
@@ -61,6 +62,7 @@ public class ArtistasDAO {
       return artista;
     }
     conn.close();
+
     return null;
   }
 
@@ -82,6 +84,7 @@ public class ArtistasDAO {
       return artistas;
     } else {
       conn.close();
+
       return null;
     }
   }

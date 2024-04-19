@@ -57,8 +57,8 @@ public class PeliculaDAO {
     return null;
   }
 
-  // metodo buscar pelicula PorNombre:
-  public Pelicula buscaPorNombre(String titulo) throws SQLException {
+  // metodo buscar pelicula por titulo:
+  public Pelicula buscaPorTitulo(String titulo) throws SQLException {
     String sql = "SELECT id, titulo, id_director, anyo, url_caratula, id_genero, es_animacion FROM peliculas WHERE titulo = ?";
 
     Connection conn = new Utilidades().getConnection(path);

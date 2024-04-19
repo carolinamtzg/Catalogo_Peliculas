@@ -37,14 +37,14 @@ public class TestPeliculaDAO {
     assertEquals(pelicula.getId(), id);
   }
 
-  // test para buscar artista por nombre:
+  // test para buscar artista por titulo:
   @Test
-  public void testBuscaPeliculaPorNombre() throws SQLException {
+  public void testBuscaPeliculaPorTitulo() throws SQLException {
     PeliculaDAO peliculaDAO = new PeliculaDAO(DB_PATH);
     String tituloPelicula = "Toy Story";
 
     // ejecucion del metodo a probar:
-    Pelicula pelicula = peliculaDAO.buscaPorNombre(tituloPelicula);
+    Pelicula pelicula = peliculaDAO.buscaPorTitulo(tituloPelicula);
     assertNotNull(pelicula); // verifica que se haya devuelto una pelicula
     assertEquals(pelicula.getTitulo(), tituloPelicula);
 

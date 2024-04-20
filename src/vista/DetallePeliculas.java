@@ -24,8 +24,6 @@ public class DetallePeliculas extends JPanel {
 
   private JButton btn;
 
-  private Pelicula pelicula;
-
   public void getDetallePeliculas(Pelicula pelicula) {
     System.out.println("me han pulsado debo pedir algo a la DB");
 

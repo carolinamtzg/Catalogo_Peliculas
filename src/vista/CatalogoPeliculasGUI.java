@@ -24,9 +24,9 @@ public class CatalogoPeliculasGUI extends JFrame {
 
   public CatalogoPeliculasGUI() {
     super("Catalogo de peliculas");
-    PeliculaDAO peliculaDAO = new PeliculaDAO(getName()); // Inicializar el DAO de Peliculas
+    PeliculaDAO peliculaDAO = new PeliculaDAO(getName()); // inicializar el DAO de Peliculas
 
-    // Crear la tabla de peliculas:
+    // crear la tabla de peliculas:
     tablaPeliculas = new JTable();
     modeloTabla = new DefaultTableModel();
     modeloTabla.addColumn("Título");
@@ -45,7 +45,7 @@ public class CatalogoPeliculasGUI extends JFrame {
     panel.add(btnActualizar, BorderLayout.SOUTH);
     add(panel);
 
-    // configurar la ventana
+    // configurar la ventana:
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setSize(600, 400);
     setLocationRelativeTo(null);
@@ -59,7 +59,7 @@ public class CatalogoPeliculasGUI extends JFrame {
     // limpiar la tabla:
     modeloTabla.setRowCount(0);
 
-    // Obtener las películas del DAO y agregarlas a la tabla
+    // obtener las películas del DAO y agregarlas a la tabla:
     try {
       ArrayList<Pelicula> peliculas = peliculaDAO.dameTodos();
       for (Pelicula pelicula : peliculas) {

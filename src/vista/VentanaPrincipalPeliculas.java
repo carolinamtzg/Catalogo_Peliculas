@@ -36,7 +36,7 @@ public class VentanaPrincipalPeliculas extends JFrame {
     modeloTabla.addColumn("Director");
     tablaPeliculas.setModel(modeloTabla);
 
-    // Botón actualizar
+    // boton actualizar:
     btnActualizar = new JButton("Actualizar");
 
     // Panel

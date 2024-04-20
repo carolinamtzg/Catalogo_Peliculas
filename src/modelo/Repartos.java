@@ -9,6 +9,15 @@ public class Repartos {
     this.id_artista = id_artista;
   }
 
+  // getters:
+  public int getId_pelicula() {
+    return id_pelicula;
+  }
+
+  public int getId_artista() {
+    return id_artista;
+  }
+
   // setters:
   public void setId_pelicula(int id_pelicula) {
     this.id_pelicula = id_pelicula;

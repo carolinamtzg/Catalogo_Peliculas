@@ -12,16 +12,6 @@ public class DirectorDAO {
 
   public DirectorDAO(String path) {
     this.path = path;
-    try {
-      Connection conn = new Utilidades().getConnection(path);
-      if (conn != null) {
-        System.out.println("Conexión establecida correctamente.");
-      }
-      conn.close(); // cierro la conexion despues de verificar
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-
   }
 
   // metodo dameTodos:

@@ -7,7 +7,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Test;
 
@@ -71,38 +70,46 @@ public class TestPeliculaDAO {
   @Test
   public void testUpdate() throws SQLException {
     PeliculaDAO peliculaDAO = new PeliculaDAO(DB_PATH);
-    int id = 11;
+    DirectorDAO directorDAO = new DirectorDAO(DB_PATH);
+    int id_pelicula = 11;
+    int id_director = 7;
 
-    /*
-     * // Insertar pelicula nueva:
-     * Director director = new Director(7, "James Cameron", "www.james_cameron.png",
-     * "www.james_cameron.com");
-     * Pelicula peliculaNuevo = new Pelicula(id, "Titanic", director, 1997,
-     * "www.titanic_caratula.png", Genero.ROMANCE,
-     * false);
-     * 
-     * peliculaDAO.insertar(peliculaNuevo);
-     */
+    // Insertar pelicula con su respectivo director:
+    Director directorNuevo = new Director(id_director, "James Cameron",
+        "www.james_cameron.png",
+        "www.james_cameron.com");
+    Pelicula peliculaNueva = new Pelicula(id_pelicula, "Titanic", directorNuevo,
+        1997,
+        "www.titanic_caratula.png", Genero.ROMANCE,
+        false);
 
-    // Comprobar insercion
-    Pelicula pelicula = peliculaDAO.buscaPorId(id);
-    // assertEquals(peliculaNuevo.getId(), pelicula.getId());
+    directorDAO.insertar(directorNuevo); // inserto director nuevo
+    peliculaDAO.insertar(peliculaNueva); // inserto pelicula nueva
 
-    // Modificar
-    String nuevaPeliculaTitulo = "Django Unchained";
-    pelicula.setTitulo(nuevaPeliculaTitulo);
+    // Comprobar insercion:
+    Pelicula pelicula = peliculaDAO.buscaPorId(id_pelicula);
+    Director director = directorDAO.buscaPorId(id_director);
+
+    assertEquals(peliculaNueva.getId(), pelicula.getId());
+    assertEquals(directorNuevo.getId(), director.getId());
+
+    // Modificar:
+    String modificoTituloPelicula = "Django Unchained";
+    pelicula.setTitulo(modificoTituloPelicula);
     peliculaDAO.modifica(pelicula);
-    // Comprobar Modificacion
-    Pelicula peliculaModificada = peliculaDAO.buscaPorId(id);
-    assertEquals(nuevaPeliculaTitulo, peliculaModificada.getTitulo());
+    // Comprobar Modificacion:
+    Pelicula peliculaModificada = peliculaDAO.buscaPorId(id_pelicula);
+    assertEquals(peliculaModificada.getTitulo(), pelicula.getTitulo());
 
-    /*
-     * // Eliminar
-     * peliculaDAO.borra(id);
-     * // Comprobar que no existe
-     * Pelicula peliculaEliminada = peliculaDAO.buscaPorId(id);
-     * assertNull(peliculaEliminada);
-     */
+    // Eliminar:
+    peliculaDAO.borra(id_pelicula);
+    directorDAO.borra(id_director);
+    // Comprobar que no existe la pelicula:
+    Pelicula peliculaEliminada = peliculaDAO.buscaPorId(id_pelicula);
+    // Comprobar que no existe el director:
+    Director directorEliminado = directorDAO.buscaPorId(id_director);
+    assertNull(peliculaEliminada);
+    assertNull(directorEliminado);
   }
 
 }

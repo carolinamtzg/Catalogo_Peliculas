@@ -56,9 +56,12 @@ public class PeliculaDAO {
       Director director = new Director(resultado.getInt("id_director"), resultado.getString("nombre_director"),
           resultado.getString("url_foto_director"), resultado.getString("url_web_director"));
 
-      return new Pelicula(id, resultado.getString("titulo_pelicula"), director, resultado.getInt("anyo_pelicula"),
+      Pelicula pelicula = new Pelicula(id, resultado.getString("titulo_pelicula"), director,
+          resultado.getInt("anyo_pelicula"),
           resultado.getString("url_caratula_pelicula"), Genero.valueOf(resultado.getString("genero_pelicula")),
           resultado.getBoolean("es_animacion_pelicula"));
+      conn.close();
+      return pelicula;
     }
     conn.close();
 
